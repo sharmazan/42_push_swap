@@ -15,18 +15,21 @@ PUSH_SWAP_OBJECTS = $(PUSH_SWAP_SOURCES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(FTPRINTF_LIB) $(PUSH_SWAP_OBJECTS) $(HEADER)
-	$(MAKE) -C $(PUSH_SWAP_PATH)
+$(NAME): $(FTPRINTF_LIB) $(LIBFT_LIB) $(PUSH_SWAP_OBJECTS) $(HEADER)
+	$(MAKE) -C $(PUSH_SWAP_PATH) CC="$(CC)" CFLAGS="$(CFLAGS)"
 	cp $(PUSH_SWAP_PATH)/$(NAME) .
 
 $(FTPRINTF_LIB):
-	$(MAKE) -C $(FTPRINTF_PATH)
+	$(MAKE) -C $(FTPRINTF_PATH) CC="$(CC)" CFLAGS="$(CFLAGS)"
 
 $(LIBFT_LIB):
-	$(MAKE) -C $(LIBFT_PATH)
+	$(MAKE) -C $(LIBFT_PATH) CC="$(CC)" CFLAGS="$(CFLAGS)"
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
+
+debug: CFLAGS += -g3 -O0
+debug: re
 
 fclean: clean
 	rm -f $(NAME)
@@ -41,4 +44,4 @@ clean:
 
 re: fclean all
 
-.PHONY: all clean tests re fclean
+.PHONY: all clean tests re fclean debug

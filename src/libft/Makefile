@@ -51,7 +51,7 @@ B_SOURCES = ft_lstnew_bonus.c \
 OBJECTS = $(SOURCES:.c=.o)
 B_OBJECTS = $(B_SOURCES:.c=.o)
 
-all: $(NAME)
+all: $(NAME) bonus
 
 $(NAME): $(OBJECTS)
 	ar rcs $(NAME) $?

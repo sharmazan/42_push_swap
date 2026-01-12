@@ -2,3 +2,5 @@ push_swap
 !push_swap/
 *.o
 *.a
+a.out
+src/libft/.bonus_linked
