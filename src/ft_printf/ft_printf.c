@@ -6,11 +6,12 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2025/12/21 17:10:28 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/01/12 16:14:17 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "helper.h"
+#include "libftprintf.h"
 #include "utils.h"
 #include <stdarg.h>
 #include <unistd.h>
@@ -56,6 +57,28 @@ int	ft_fprintf(int fd, const char *format, ...)
 		}
 		else
 			printed += write(fd, format++, 1);
+	}
+	va_end(args);
+	return (printed);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list	args;
+	int		printed;
+
+	printed = 0;
+	va_start(args, format);
+	while (*format)
+	{
+		if (*format == '%')
+		{
+			format++;
+			printed += ft_print_formated(STDOUT, args, *format);
+			format++;
+		}
+		else
+			printed += write(STDOUT, format++, 1);
 	}
 	va_end(args);
 	return (printed);

@@ -6,3 +6,6 @@
 - Sort stackA
 - output operations
 - Fill the README.md according to the Requirements
+
+## Allowed external functions:
+read, write, malloc, free, exit
