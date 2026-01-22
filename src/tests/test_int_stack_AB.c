@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/01/22 18:49:20 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/01/22 19:11:47 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,19 @@ int	sorted(my_stack *stack)
 	return (flag);
 }
 
+void	pb(my_stack **stackA, my_stack **stackB)
+{
+	my_stack	*el;
+
+	if (*stackA)
+	{
+		el = *stackA;
+		*stackA = (*stackA)->next;
+		el->next = *stackB;
+		*stackB = el;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	my_stack	*stackA;
@@ -76,6 +89,7 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	stackA = NULL;
+	stackB = NULL;
 	i = 1;
 	while (i < ac)
 	{
@@ -86,10 +100,27 @@ int	main(int ac, char **av)
 		i++;
 	}
 	print_stack(stackA);
+	print_stack(stackB);
 	if (sorted(stackA))
-		printf("Sorted\n");
+		printf("A is sorted\n");
 	else
-		printf("Not sorted\n");
+		printf("A is not sorted\n");
+	if (sorted(stackB))
+		printf("B is sorted\n");
+	else
+		printf("B is not sorted\n");
+	pb(&stackA, &stackB);
+	print_stack(stackA);
+	print_stack(stackB);
+	if (sorted(stackA))
+		printf("A is sorted\n");
+	else
+		printf("A is not sorted\n");
+	if (sorted(stackB))
+		printf("B is sorted\n");
+	else
+		printf("B is not sorted\n");
 	free_stack(stackA);
+	free_stack(stackB);
 	return (0);
 }
