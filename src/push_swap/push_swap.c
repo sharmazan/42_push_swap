@@ -16,10 +16,40 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+static void logmessage(char *s)
+{
+	while (*s)
+		write(STDOUT, s++, 1);
+	write(STDOUT, "\n", 1);
+}
+
+static void logerr(char *s)
+{
+	while (*s)
+		write(STDERR, s++, 1);
+	write(STDERR, "\n", 1);
+}
+
 static void	errexit(char *s)
 {
-	ft_fprintf(STDERR, "%s\n", s);
+	logerr(s);
 	exit(1);
+}
+
+static void	print_number(void *number)
+{
+	ft_printf("%d\n", *(int *)number);
+}
+
+static void	print_pointer(void *pointer)
+{
+	ft_printf("%p\n", pointer);
+}
+
+static void	print_stack(void *stack)
+{
+	logmessage("print_stack");
+	ft_lstiter(stack, print_number);
 }
 
 static void	verify_int(char *s)
@@ -49,15 +79,16 @@ static void	store_numbers(int ac, char **av, t_list **stack)
 	int		*n;
 	t_list	*el;
 
+	logmessage("store_numbers");
 	i = 1;
-	n = malloc(sizeof(int));
-	if (!n)
-	{
-		ft_lstclear(stack, free);
-		errexit("malloc Error");
-	}
 	while (i < ac)
 	{
+		n = malloc(sizeof(int));
+		if (!n)
+		{
+			ft_lstclear(stack, free);
+			errexit("malloc Error");
+		}
 		*n = ft_atoi(av[i++]);
 		ft_printf("%d converted\n", *n);
 		el = ft_lstnew(n);
@@ -70,24 +101,9 @@ static void	store_numbers(int ac, char **av, t_list **stack)
 		ft_printf("%d stored\n", *(int *)(el->content));
 		ft_printf("List size: %d\n", ft_lstsize(*stack));
 		ft_printf("stack: %p\n", *stack);
-		ft_printf("first el: %p\n", **stack);
+		print_stack(*stack);
 	}
 }
-
-static void	print_number(void *number)
-{
-	ft_printf("%d\n", *(int *)number);
-}
-
-static void	print_pointer(void *pointer)
-{
-	ft_printf("%p\n", pointer);
-}
-
-// static void	print_stack(void *stack)
-// {
-// 	ft_lstiter(stack, print_number);
-// }
 
 int	main(int ac, char **av)
 {
@@ -96,16 +112,17 @@ int	main(int ac, char **av)
 
 	stackA = NULL; // malloc(sizeof(t_list *));
 	stackB = NULL;
+	logmessage("verify_arguments");
 	verify_arguments(ac, av);
-	write(STDOUT, "verify_arguments", 10);
 	ft_printf("stackA: %p\n", stackA);
 	store_numbers(ac, av, &stackA);
-	write(STDOUT, "store_numbers", 10);
-	ft_printf("stackA: %p\n", stackA);
-	// print_stack(stackA);
-	ft_lstiter(stackA, print_pointer);
-	ft_lstiter(stackA, print_number);
-	write(STDOUT, "print_stack", 10);
+	logmessage("stackA: ");
+	print_pointer(stackA);
+	// ft_printf("stackA: %p\n", stackA);
+	print_stack(stackA);
+	// ft_lstiter(stackA, print_pointer);
+	// ft_lstiter(stackA, print_number);
+	logmessage("free stacks");
 	ft_lstclear(&stackA, free);
 	ft_lstclear(&stackB, free);
 	return (0);
