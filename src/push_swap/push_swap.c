@@ -67,19 +67,21 @@ static void	verify_arguments(int ac, char **av)
 		exit(0);
 	i = 1;
 	while (i < ac)
-	{
-		verify_int(av[i]);
-		ft_printf("%d\n", ft_atoi(av[i++]));
-	}
+		verify_int(av[i++]);
 }
 
+// logmessage("store_numbers");
+// ft_printf("%d converted\n", *n);
+// ft_printf("%d stored\n", *(int *)(el->content));
+// ft_printf("List size: %d\n", ft_lstsize(*stack));
+// ft_printf("stack: %p\n", *stack);
+// print_stack(*stack);
 static void	store_numbers(int ac, char **av, t_list **stack)
 {
 	int		i;
 	int		*n;
 	t_list	*el;
 
-	logmessage("store_numbers");
 	i = 1;
 	while (i < ac)
 	{
@@ -90,7 +92,6 @@ static void	store_numbers(int ac, char **av, t_list **stack)
 			errexit("malloc Error");
 		}
 		*n = ft_atoi(av[i++]);
-		ft_printf("%d converted\n", *n);
 		el = ft_lstnew(n);
 		if (!el)
 		{
@@ -98,10 +99,6 @@ static void	store_numbers(int ac, char **av, t_list **stack)
 			errexit("malloc Error");
 		}
 		ft_lstadd_back(stack, el);
-		ft_printf("%d stored\n", *(int *)(el->content));
-		ft_printf("List size: %d\n", ft_lstsize(*stack));
-		ft_printf("stack: %p\n", *stack);
-		print_stack(*stack);
 	}
 }
 
@@ -115,6 +112,7 @@ int	main(int ac, char **av)
 	logmessage("verify_arguments");
 	verify_arguments(ac, av);
 	ft_printf("stackA: %p\n", stackA);
+	logmessage("store_numbers");
 	store_numbers(ac, av, &stackA);
 	logmessage("stackA: ");
 	print_pointer(stackA);
