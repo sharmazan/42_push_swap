@@ -9,7 +9,9 @@ FTPRINTF_LIB = $(FTPRINTF_PATH)/libftprintf.a
 HEADER = ../inc/ft_header.h
 
 
-SOURCES =	push_swap.c
+SOURCES =	push_swap.c \
+			ps_helper.c \
+			helpers.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

@@ -12,39 +12,7 @@
 
 #include "../ft_printf/libftprintf.h"
 #include "../inc/ft_header.h"
-#include "../libft/libft.h"
 #include <stdlib.h>
-#include <unistd.h>
-
-static void logmessage(char *s)
-{
-	while (*s)
-		write(STDOUT, s++, 1);
-	write(STDOUT, "\n", 1);
-}
-
-static void logerr(char *s)
-{
-	while (*s)
-		write(STDERR, s++, 1);
-	write(STDERR, "\n", 1);
-}
-
-static void	errexit(char *s)
-{
-	logerr(s);
-	exit(1);
-}
-
-static void	print_number(void *number)
-{
-	ft_printf("%d\n", *(int *)number);
-}
-
-static void	print_pointer(void *pointer)
-{
-	ft_printf("%p\n", pointer);
-}
 
 static void	print_stack(void *stack)
 {
@@ -118,8 +86,32 @@ int	main(int ac, char **av)
 	print_pointer(stackA);
 	// ft_printf("stackA: %p\n", stackA);
 	print_stack(stackA);
+	if (sorted(stackA))
+		ft_printf("A is sorted\n");
+	else
+		ft_printf("A is not sorted\n");
 	// ft_lstiter(stackA, print_pointer);
 	// ft_lstiter(stackA, print_number);
+
+	logmessage("stackB: ");
+	print_pointer(stackB);
+	print_stack(stackB);
+	if (sorted(stackB))
+		ft_printf("B is sorted\n");
+	else
+		ft_printf("B is not sorted\n");
+	pb(&stackA, &stackB);
+	print_stack(stackA);
+	print_stack(stackB);
+	if (sorted(stackA))
+		ft_printf("A is sorted\n");
+	else
+		ft_printf("A is not sorted\n");
+	if (sorted(stackB))
+		ft_printf("B is sorted\n");
+	else
+		ft_printf("B is not sorted\n");
+
 	logmessage("free stacks");
 	ft_lstclear(&stackA, free);
 	ft_lstclear(&stackB, free);

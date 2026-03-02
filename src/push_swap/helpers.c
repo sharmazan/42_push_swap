@@ -1,36 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_header.h                                        :+:      :+:    :+:   */
+/*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/01/12 16:15:51 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/01/12 18:49:59 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_HEADER_H
-# define FT_HEADER_H
+#include "../inc/ft_header.h"
+#include <unistd.h>
 
-# ifndef STDOUT
-#  define STDOUT 1
-# endif
-# ifndef STDERR
-#  define STDERR 2
-# endif
+void logmessage(char *s)
+{
+	while (*s)
+		write(STDOUT, s++, 1);
+	write(STDOUT, "\n", 1);
+}
 
-#include "../libft/libft.h"
-#include "../ft_printf/libftprintf.h"
+void logerr(char *s)
+{
+	while (*s)
+		write(STDERR, s++, 1);
+	write(STDERR, "\n", 1);
+}
 
-int     sorted(t_list *stack);
-void	pb(t_list **stackA, t_list **stackB);
+void	errexit(char *s)
+{
+	logerr(s);
+	exit(1);
+}
 
+void	print_number(void *number)
+{
+	ft_printf("%d\n", *(int *)number);
+}
 
-void    logmessage(char *s);
-void    logerr(char *s);
-void	errexit(char *s);
-void	print_number(void *number);
-void	print_pointer(void *pointer);
-
-#endif
+void	print_pointer(void *pointer)
+{
+	ft_printf("%p\n", pointer);
+}
