@@ -112,6 +112,22 @@ int	main(int ac, char **av)
 	else
 		ft_printf("B is not sorted\n");
 
+	pa(&stackA, &stackB);
+	print_stack(stackA);
+	print_stack(stackB);
+	if (sorted(stackA))
+		ft_printf("A is sorted\n");
+	else
+		ft_printf("A is not sorted\n");
+	if (sorted(stackB))
+		ft_printf("B is sorted\n");
+	else
+		ft_printf("B is not sorted\n");
+
+	ra(&stackA);
+	print_stack(stackA);
+	// print_stack(stackB);
+
 	logmessage("free stacks");
 	ft_lstclear(&stackA, free);
 	ft_lstclear(&stackB, free);

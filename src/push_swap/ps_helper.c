@@ -40,7 +40,44 @@ void	pb(t_list **stackA, t_list **stackB)
 		logmessage("pb");
 		el = *stackA;
 		*stackA = (*stackA)->next;
-		el->next = *stackB;
-		*stackB = el;
+		ft_lstadd_front(stackB, el);
 	}
+}
+
+void	pa(t_list **stackA, t_list **stackB)
+{
+	t_list  *el;
+
+	if (*stackB)
+	{
+		logmessage("pa");
+		el = *stackB;
+		*stackB = (*stackB)->next;
+		ft_lstadd_front(stackA, el);
+	}
+}
+
+static void	rotate(t_list **stack)
+{
+	t_list  *el;
+
+	if (*stack)
+	{
+		el = *stack;
+		*stack = (*stack)->next;
+		el->next = NULL;
+		ft_lstadd_back(stack, el);
+	}
+}
+
+void	ra(t_list **stack)
+{
+	logmessage("ra");
+	rotate(stack);
+}
+
+void	rb(t_list **stack)
+{
+	logmessage("rb");
+	rotate(stack);
 }
