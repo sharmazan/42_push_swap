@@ -57,7 +57,7 @@ void	pa(t_list **stackA, t_list **stackB)
 	}
 }
 
-static void	rotate(t_list **stack)
+void	rotate(t_list **stack)
 {
 	t_list  *el;
 

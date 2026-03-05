@@ -28,6 +28,7 @@ void	pa(t_list **stackA, t_list **stackB);
 void	pb(t_list **stackA, t_list **stackB);
 void	ra(t_list **stack);
 void	rb(t_list **stack);
+void	rotate(t_list **stack);
 
 
 void    logmessage(char *s);

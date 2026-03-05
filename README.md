@@ -6,9 +6,6 @@
 --- the presence of duplicates.
 --- Analyze also "a b c" format of arguments
 
-Do the ps_helper functions:
-pb, pa, rb, ra
-
 Implement Radix:
 - Store numbers to an array, replace them with indexes from 0.
 - Sort the stack bit by bit:
@@ -21,3 +18,10 @@ Implement Radix:
 
 ## Allowed external functions:
 read, write, malloc, free, exit
+
+
+Done:
+the ps_helper functions:
+pb, pa, rb, ra
+
+saving numbers to an array

@@ -77,56 +77,74 @@ int	main(int ac, char **av)
 
 	stackA = NULL; // malloc(sizeof(t_list *));
 	stackB = NULL;
-	logmessage("verify_arguments");
+	// logmessage("verify_arguments");
 	verify_arguments(ac, av);
-	ft_printf("stackA: %p\n", stackA);
-	logmessage("store_numbers");
-	store_numbers(ac, av, &stackA);
-	logmessage("stackA: ");
-	print_pointer(stackA);
 	// ft_printf("stackA: %p\n", stackA);
-	print_stack(stackA);
+	// logmessage("store_numbers");
+	store_numbers(ac, av, &stackA);
+	// logmessage("stackA: ");
+	// print_pointer(stackA);
+	// ft_printf("stackA: %p\n", stackA);
+	// print_stack(stackA);
 	if (sorted(stackA))
-		ft_printf("A is sorted\n");
-	else
-		ft_printf("A is not sorted\n");
+		exit(0);
 	// ft_lstiter(stackA, print_pointer);
 	// ft_lstiter(stackA, print_number);
 
-	logmessage("stackB: ");
-	print_pointer(stackB);
-	print_stack(stackB);
-	if (sorted(stackB))
-		ft_printf("B is sorted\n");
-	else
-		ft_printf("B is not sorted\n");
-	pb(&stackA, &stackB);
-	print_stack(stackA);
-	print_stack(stackB);
-	if (sorted(stackA))
-		ft_printf("A is sorted\n");
-	else
-		ft_printf("A is not sorted\n");
-	if (sorted(stackB))
-		ft_printf("B is sorted\n");
-	else
-		ft_printf("B is not sorted\n");
-
-	pa(&stackA, &stackB);
-	print_stack(stackA);
-	print_stack(stackB);
-	if (sorted(stackA))
-		ft_printf("A is sorted\n");
-	else
-		ft_printf("A is not sorted\n");
-	if (sorted(stackB))
-		ft_printf("B is sorted\n");
-	else
-		ft_printf("B is not sorted\n");
-
-	ra(&stackA);
-	print_stack(stackA);
+	// logmessage("stackB: ");
+	// print_pointer(stackB);
 	// print_stack(stackB);
+	// if (sorted(stackB))
+	// 	ft_printf("B is sorted\n");
+	// else
+	// 	ft_printf("B is not sorted\n");
+	// pb(&stackA, &stackB);
+	// print_stack(stackA);
+	// print_stack(stackB);
+	// if (sorted(stackA))
+	// 	ft_printf("A is sorted\n");
+	// else
+	// 	ft_printf("A is not sorted\n");
+	// if (sorted(stackB))
+	// 	ft_printf("B is sorted\n");
+	// else
+	// 	ft_printf("B is not sorted\n");
+
+	// pa(&stackA, &stackB);
+	// print_stack(stackA);
+	// print_stack(stackB);
+	// if (sorted(stackA))
+	// 	ft_printf("A is sorted\n");
+	// else
+	// 	ft_printf("A is not sorted\n");
+	// if (sorted(stackB))
+	// 	ft_printf("B is sorted\n");
+	// else
+	// 	ft_printf("B is not sorted\n");
+
+	// ra(&stackA);
+	// print_stack(stackA);
+	// print_stack(stackB);
+
+	logmessage("Save numbers to an array");
+	int	numbers = ft_lstsize(stackA);
+	ft_printf("There is %d numbers\n", numbers);
+	int	*a = malloc(numbers * sizeof(int));
+	if (!a)
+		errexit("Malloc error");
+	int	i = 0;
+	while (i < numbers)
+	{
+		a[i] = *(int *)stackA->content;
+		rotate(&stackA);
+		ft_printf("%d\n", a[i]);
+		i++;
+	}
+	logmessage("Printing stack A");
+	print_stack(stackA);
+
+
+	// logmessage("Normalize stack A");
 
 	logmessage("free stacks");
 	ft_lstclear(&stackA, free);
