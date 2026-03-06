@@ -22,8 +22,19 @@ static void	print_stack(void *stack)
 
 static void	verify_int(char *s)
 {
-	if (ft_strncmp(s, ft_itoa(ft_atoi(s)), ft_strlen(s)))
+	char	*converted;
+	size_t	len;
+
+	len = ft_strlen(s);
+	converted = ft_itoa(ft_atoi(s));
+	if (!converted)
+		errexit("malloc Error");
+	if (ft_strncmp(s, converted, len + 1))
+	{
+		free(converted);
 		errexit("Error");
+	}
+	free(converted);
 }
 
 // ft_printf("%d\n", ft_atoi(av[i++]));
@@ -31,9 +42,7 @@ static void	verify_arguments(int ac, char **av)
 {
 	int	i;
 
-	if (ac == 1)
-		exit(0);
-	i = 1;
+	i = 0;
 	while (i < ac)
 		verify_int(av[i++]);
 }
@@ -50,7 +59,7 @@ static void	store_numbers(int ac, char **av, t_list **stack)
 	int		*n;
 	t_list	*el;
 
-	i = 1;
+	i = 0;
 	while (i < ac)
 	{
 		n = malloc(sizeof(int));
@@ -70,6 +79,37 @@ static void	store_numbers(int ac, char **av, t_list **stack)
 	}
 }
 
+void verify_and_store_numbers(int ac, char **av, t_list **stack)
+{
+	char	**args;
+	int		count;
+
+	if (ac == 1)
+		exit(0);
+	if (ac == 2)
+	{
+		args = ft_split(av[1], ' ');
+		if (!args)
+			errexit("malloc Error");
+		count = 0;
+		while (args[count])
+			count++;
+		if (count == 0)
+		{
+			free(args);
+			exit(0);
+		}
+		verify_arguments(count, args);
+		store_numbers(count, args, stack);
+		while (count--)
+			free(args[count]);
+		free(args);
+		return ;
+	}
+	verify_arguments(ac - 1, av + 1);
+	store_numbers(ac - 1, av + 1, stack);
+}
+
 int	main(int ac, char **av)
 {
 	t_list	*stackA;
@@ -78,16 +118,21 @@ int	main(int ac, char **av)
 	stackA = NULL; // malloc(sizeof(t_list *));
 	stackB = NULL;
 	// logmessage("verify_arguments");
-	verify_arguments(ac, av);
-	// ft_printf("stackA: %p\n", stackA);
-	// logmessage("store_numbers");
-	store_numbers(ac, av, &stackA);
+
+	// verify_arguments(ac, av);
+	// // ft_printf("stackA: %p\n", stackA);
+	// // logmessage("store_numbers");
+	verify_and_store_numbers(ac, av, &stackA);
 	// logmessage("stackA: ");
 	// print_pointer(stackA);
 	// ft_printf("stackA: %p\n", stackA);
 	// print_stack(stackA);
 	if (sorted(stackA))
-		exit(0);
+	{
+		ft_lstclear(&stackA, free);
+		ft_lstclear(&stackB, free);
+		return (0);
+	}
 	// ft_lstiter(stackA, print_pointer);
 	// ft_lstiter(stackA, print_number);
 
@@ -147,6 +192,7 @@ int	main(int ac, char **av)
 	// logmessage("Normalize stack A");
 
 	logmessage("free stacks");
+	free(a);
 	ft_lstclear(&stackA, free);
 	ft_lstclear(&stackB, free);
 	return (0);

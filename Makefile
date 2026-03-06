@@ -1,7 +1,7 @@
 NAME = push_swap
 SRC_PATH = src
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 
 PUSH_SWAP_PATH = $(SRC_PATH)/$(NAME)
 LIBFT_PATH = $(SRC_PATH)/libft
