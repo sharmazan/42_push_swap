@@ -23,7 +23,7 @@ int	sorted(t_list *stack)
 	{
 		el = stack;
 		if (el->next)
-			flag = *(int *)el->content <= *(int *)el->next->content;
+			flag = *(int *)el->content < *(int *)el->next->content;
 		stack = el->next;
 		if (!flag)
 			break ;
