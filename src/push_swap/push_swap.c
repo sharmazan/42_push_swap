@@ -245,22 +245,24 @@ int	main(int ac, char **av)
 	if (sorted(stackA))
 		clear_and_exit(array, &stackA, &stackB);
 	sort_array(array, num_count);
-	print_array(array, num_count);
-	// ft_printf("Numbers %d\n", num_count);
-	int i = 0;
-	while (i < num_count)
-	{
-		ft_printf("Index of %d is %d\n", array[i], find_in_array(array[i], array, num_count));
-		i++;
-	}
-	ft_printf("Index of 15 is %d\n", find_in_array(15, array, num_count));
 
-
-	// normalizing_array(array);
 	if (is_duplicates(array, num_count))
 		logmessage("Error");
 	else
 		sort_stacks(&stackA, &stackB);
+
+	print_stack(stackA);
+	rra(&stackA);
+	print_stack(stackA);
+
+	pb(&stackA, &stackB);
+	pb(&stackA, &stackB);
+	pb(&stackA, &stackB);
+
+	print_stack(stackB);
+	rrb(&stackB);
+	print_stack(stackB);
+
 
 	clear_and_exit(array, &stackA, &stackB);
 }
@@ -296,3 +298,20 @@ int	main(int ac, char **av)
 	// pa(&stackA, &stackB);
 	// print_stack(stackA);
 	// print_stack(stackB);
+
+
+	// print_array(array, num_count);
+	// // ft_printf("Numbers %d\n", num_count);
+	// int i = 0;
+	// while (i < num_count)
+	// {
+	// 	ft_printf("Index of %d is %d\n", array[i], find_in_array(array[i], array, num_count));
+	// 	i++;
+	// }
+	// ft_printf("Index of 15 is %d\n", find_in_array(15, array, num_count));
+
+
+	// print_stack(stackA);
+	// reverse_rotate(&stackA);
+	// print_stack(stackA);
+

@@ -6,6 +6,12 @@
 --- DONE the presence of duplicates.
 --- DONE Analyze also "a b c" format of arguments
 
+Start with selection sort:
+- find the lowest number with ra | rra
+- pb
+- repeat until there is elements in A
+return all elements in A
+
 Implement Radix:
 - Store numbers to an array, replace them with indexes from 0.
 - Sort the stack bit by bit:

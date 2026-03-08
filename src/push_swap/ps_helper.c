@@ -70,6 +70,27 @@ void	rotate(t_list **stack)
 	}
 }
 
+void	reverse_rotate(t_list **stack)
+{
+	t_list  *el, *prev, *head;
+
+	if (*stack && (*stack)->next)
+	{
+		head = *stack;
+		el = head->next;
+		prev = head;
+
+		while (el->next)
+		{
+			prev = el;
+			el = el->next;
+		}
+
+		prev->next = NULL;
+		ft_lstadd_front(stack, el);
+	}
+}
+
 void	ra(t_list **stack)
 {
 	logmessage("ra");
@@ -80,4 +101,16 @@ void	rb(t_list **stack)
 {
 	logmessage("rb");
 	rotate(stack);
+}
+
+void	rra(t_list **stack)
+{
+	logmessage("rra");
+	reverse_rotate(stack);
+}
+
+void	rrb(t_list **stack)
+{
+	logmessage("rrb");
+	reverse_rotate(stack);
 }
