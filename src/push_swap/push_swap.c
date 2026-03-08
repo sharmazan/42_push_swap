@@ -131,7 +131,7 @@ void	clear_and_exit(int *a, t_list **stackA, t_list **stackB)
 	exit(0);
 }
 
-int	find_in_array(int n, int *a, size_t len)
+int	index_in_array(int n, int *a, size_t len)
 {
 	size_t	pos, l, r;
 
@@ -261,10 +261,67 @@ void	selection_sort_stacks(t_list **stackA, t_list **stackB)
 	// print_stack(*stackB);
 }
 
+int	bits_in_number(int n)
+{
+	int	bits;
+
+	bits = 0;
+	while (n)
+	{
+		bits++;
+		n >>= 1;
+	}
+	return bits;
+}
+
+void	normalize_stack(t_list **stack, int *arr, int len)
+{
+	t_list	*el;
+
+	el = *stack;
+	while (el)
+	{
+		*(int *)(el->content) = index_in_array(*(int *)(el->content), arr, len);
+		el = el->next;
+	}
+}
+
+void	radix_sort_stacks(t_list **stackA, t_list **stackB)
+{
+	int	i, num_count, max_bits;
+	// void	(*op)(t_list **stack);
+
+	num_count = ft_lstsize(*stackA);
+	max_bits = bits_in_number(num_count - 1);
+	i = 0;
+	
+	// ft_printf("Max bits: %d in number: %d\n", max_bits, num_count);
+	(void)stackA;
+	(void)stackB;
+	while (i < max_bits)
+	{
+		num_count = ft_lstsize(*stackA);
+		while (num_count)
+		{
+			// ft_printf("number: %d\n", *(int *)(*stackA)->content);
+			// ft_printf("bit: %d\n", i);
+			if (get_bit(i, *(int *)(*stackA)->content))
+				ra(stackA);
+			else
+				pb(stackA, stackB);
+			num_count--;
+		}
+		while (*stackB)
+			pa(stackA, stackB);
+		i++;
+	}
+}
+
 void	sort_stacks(t_list **stackA, t_list **stackB)
 {
 	// logmessage("Sorting stacks");
-	selection_sort_stacks(stackA, stackB);
+	// selection_sort_stacks(stackA, stackB);
+	radix_sort_stacks(stackA, stackB);
 }
 
 void	print_array(int *a, int len)
@@ -276,6 +333,13 @@ void	print_array(int *a, int len)
 	while (i < len)
 		ft_printf("%d\n", a[i++]);
 }
+
+void	print_stack(void *stack)
+{
+	logmessage("print_stack");
+	ft_lstiter(stack, print_number);
+}
+
 
 int	main(int ac, char **av)
 {
@@ -300,7 +364,15 @@ int	main(int ac, char **av)
 	if (is_duplicates(array, num_count))
 		logmessage("Error");
 	else
+	{
+		normalize_stack(&stackA, array, num_count);
+		// print_stack(stackA);
 		sort_stacks(&stackA, &stackB);
+
+	}
+
+	
+	// print_stack(stackA);
 
 	clear_and_exit(array, &stackA, &stackB);
 }
@@ -343,10 +415,10 @@ int	main(int ac, char **av)
 	// int i = 0;
 	// while (i < num_count)
 	// {
-	// 	ft_printf("Index of %d is %d\n", array[i], find_in_array(array[i], array, num_count));
+	// 	ft_printf("Index of %d is %d\n", array[i], index_in_array(array[i], array, num_count));
 	// 	i++;
 	// }
-	// ft_printf("Index of 15 is %d\n", find_in_array(15, array, num_count));
+	// ft_printf("Index of 15 is %d\n", index_in_array(15, array, num_count));
 
 
 	// print_stack(stackA);

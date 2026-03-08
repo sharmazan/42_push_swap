@@ -43,8 +43,9 @@ void	print_pointer(void *pointer)
 	ft_printf("%p\n", pointer);
 }
 
-void	print_stack(void *stack)
+char	get_bit(int pos, unsigned int c)
 {
-	logmessage("print_stack");
-	ft_lstiter(stack, print_number);
+	if (((1 << pos) & c) == 0)
+		return (0);
+	return (1);
 }

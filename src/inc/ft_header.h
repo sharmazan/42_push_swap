@@ -32,6 +32,8 @@ void	rra(t_list **stack);
 void	rrb(t_list **stack);
 void	rotate(t_list **stack);
 void	reverse_rotate(t_list **stack);
+char	get_bit(int pos, unsigned int c);
+
 
 void    logmessage(char *s);
 void    logerr(char *s);
