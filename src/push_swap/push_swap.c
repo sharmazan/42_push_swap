@@ -14,12 +14,6 @@
 #include "../inc/ft_header.h"
 #include <stdlib.h>
 
-static void	print_stack(void *stack)
-{
-	logmessage("print_stack");
-	ft_lstiter(stack, print_number);
-}
-
 static void	verify_int(char *s)
 {
 	char	*converted;
@@ -112,9 +106,9 @@ void verify_and_store_numbers(int ac, char **av, t_list **stack)
 
 int	stack_to_array(t_list *stack, int **a)
 {
-	logmessage("Save numbers to an array");
+	// logmessage("Save numbers to an array");
 	int	numbers = ft_lstsize(stack);
-	ft_printf("There is %d numbers\n", numbers);
+	// ft_printf("There is %d numbers\n", numbers);
 	*a = malloc(numbers * sizeof(int));
 	if (!a)
 		errexit("Malloc error");
@@ -167,7 +161,7 @@ void	sort_array(int *a, size_t len)
 	size_t	n, i, j, middle;
 	int sorted[len];
 
-	logmessage("Sorting array");
+	// logmessage("Sorting array");
 	if (len == 1)
 		return;
 	middle = len / 2;
@@ -199,7 +193,7 @@ int	is_duplicates(int *a, size_t len)
 {
 	size_t	i;
 	
-	logmessage("Verify duplicates");
+	// logmessage("Verify duplicates");
 	if (len < 2)
 		return 0;
 	i = 0;
@@ -209,11 +203,68 @@ int	is_duplicates(int *a, size_t len)
 	return 0;
 }
 
+int	min_index_in_stack(t_list *stack)
+{
+	int	min_pos, min, pos;
+	t_list	*el;
+
+	if (!stack)
+		return -1;
+	el = stack;
+	min = *(int *)el->content;
+	min_pos = 0;
+	pos = 0;
+	while (el->next)
+	{
+		el = el->next;
+		pos++;
+		if (*(int *)el->content < min)
+		{
+			min = *(int *)el->content;
+			min_pos = pos;
+		}
+	}
+	return min_pos;
+}
+
+void	selection_sort_stacks(t_list **stackA, t_list **stackB)
+{
+	int	i, num_count;
+	void	(*op)(t_list **stack);
+
+	while (*stackA && (*stackA)->next)
+	{
+		num_count = ft_lstsize(*stackA);
+		i = min_index_in_stack(*stackA);
+		// ft_printf("NUmbers in A: %d, minimum index: %d\n", num_count, i);
+		op = ra;
+		if (i > num_count - i)
+		{
+			op = rra;
+			i = num_count - i;
+		}
+		while (i--)
+			op(stackA);
+		pb(stackA, stackB);
+	}
+	while (*stackB)
+		pa(stackA, stackB);
+	// print_stack(*stackA);
+	// rra(stackA);
+	// print_stack(*stackB);
+
+	// pb(stackA, stackB);
+	// pb(stackA, stackB);
+
+	// print_stack(*stackB);
+	// rrb(stackB);
+	// print_stack(*stackB);
+}
+
 void	sort_stacks(t_list **stackA, t_list **stackB)
 {
-	logmessage("Sorting stacks");
-	(void)stackA;
-	(void)stackB;
+	// logmessage("Sorting stacks");
+	selection_sort_stacks(stackA, stackB);
 }
 
 void	print_array(int *a, int len)
@@ -237,11 +288,11 @@ int	main(int ac, char **av)
 	stackB = NULL;
 	
 	verify_and_store_numbers(ac, av, &stackA);
-	logmessage("Printing stack A");
-	print_stack(stackA);
+	// logmessage("Printing stack A");
+	// print_stack(stackA);
 
 	num_count = stack_to_array(stackA, &array);
-	print_array(array, num_count);
+	// print_array(array, num_count);
 	if (sorted(stackA))
 		clear_and_exit(array, &stackA, &stackB);
 	sort_array(array, num_count);
@@ -250,19 +301,6 @@ int	main(int ac, char **av)
 		logmessage("Error");
 	else
 		sort_stacks(&stackA, &stackB);
-
-	print_stack(stackA);
-	rra(&stackA);
-	print_stack(stackA);
-
-	pb(&stackA, &stackB);
-	pb(&stackA, &stackB);
-	pb(&stackA, &stackB);
-
-	print_stack(stackB);
-	rrb(&stackB);
-	print_stack(stackB);
-
 
 	clear_and_exit(array, &stackA, &stackB);
 }
@@ -314,4 +352,16 @@ int	main(int ac, char **av)
 	// print_stack(stackA);
 	// reverse_rotate(&stackA);
 	// print_stack(stackA);
+
+	// print_stack(stackA);
+	// rra(&stackA);
+	// print_stack(stackA);
+
+	// pb(&stackA, &stackB);
+	// pb(&stackA, &stackB);
+	// pb(&stackA, &stackB);
+
+	// print_stack(stackB);
+	// rrb(&stackB);
+	// print_stack(stackB);
 

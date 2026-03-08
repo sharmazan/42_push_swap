@@ -42,3 +42,9 @@ void	print_pointer(void *pointer)
 {
 	ft_printf("%p\n", pointer);
 }
+
+void	print_stack(void *stack)
+{
+	logmessage("print_stack");
+	ft_lstiter(stack, print_number);
+}
