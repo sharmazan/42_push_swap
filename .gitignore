@@ -4,3 +4,4 @@ push_swap
 *.a
 a.out
 src/libft/.bonus_linked
+.vscode/
