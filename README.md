@@ -1,9 +1,7 @@
 # TODO
 
-
-Implement Chunking
-
 - Fill the README.md according to the Requirements
+- (Optionally) Implement Chunking
 
 ## Allowed external functions:
 read, write, malloc, free, exit
