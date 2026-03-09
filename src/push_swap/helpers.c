@@ -45,7 +45,5 @@ void	print_pointer(void *pointer)
 
 char	get_bit(int pos, unsigned int c)
 {
-	if (((1 << pos) & c) == 0)
-		return (0);
-	return (1);
+	return (1 << pos) & c;
 }

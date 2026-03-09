@@ -1,6 +1,7 @@
 # TODO
 
 - Fill the README.md according to the Requirements
+- Norminette?
 - (Optionally) Implement Chunking
 
 ## Allowed external functions:
