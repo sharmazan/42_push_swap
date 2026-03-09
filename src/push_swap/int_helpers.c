@@ -1,37 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_helper.c                                        :+:      :+:    :+:   */
+/*   int_helpers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/09 15:49:00 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/09 15:58:43 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_header.h"
 
-void	ra(t_list **stack)
+char	get_bit(int pos, unsigned int c)
 {
-	logmessage("ra");
-	rotate(stack);
+	return ((1 << pos) & c);
 }
 
-void	rb(t_list **stack)
+int	bits_in_number(int n)
 {
-	logmessage("rb");
-	rotate(stack);
+	int	bits;
+
+	bits = 0;
+	while (n)
+	{
+		bits++;
+		n >>= 1;
+	}
+	return (bits);
 }
 
-void	rra(t_list **stack)
+void	verify_int(char *s)
 {
-	logmessage("rra");
-	reverse_rotate(stack);
-}
+	char	*converted;
+	size_t	len;
 
-void	rrb(t_list **stack)
-{
-	logmessage("rrb");
-	reverse_rotate(stack);
+	len = ft_strlen(s);
+	converted = ft_itoa(ft_atoi(s));
+	if (!converted)
+		errexit("malloc Error");
+	if (ft_strncmp(s, converted, len + 1))
+	{
+		free(converted);
+		errexit("Error");
+	}
+	free(converted);
 }

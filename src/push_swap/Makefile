@@ -11,6 +11,11 @@ HEADER = ../inc/ft_header.h
 
 SOURCES =	push_swap.c \
 			ps_helper.c \
+			stack_helpers.c \
+			array_helpers.c \
+			push_helpers.c \
+			args_helpers.c \
+			int_helpers.c \
 			helpers.c
 
 OBJECTS = $(SOURCES:.c=.o)

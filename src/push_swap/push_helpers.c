@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_helper.c                                        :+:      :+:    :+:   */
+/*   push_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/09 15:49:00 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/09 15:51:09 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_header.h"
+#include <unistd.h>
 
-void	ra(t_list **stack)
+void	pb(t_list **stackA, t_list **stackB)
 {
-	logmessage("ra");
-	rotate(stack);
+	t_list	*el;
+
+	if (*stackA)
+	{
+		logmessage("pb");
+		el = *stackA;
+		*stackA = (*stackA)->next;
+		ft_lstadd_front(stackB, el);
+	}
 }
 
-void	rb(t_list **stack)
+void	pa(t_list **stackA, t_list **stackB)
 {
-	logmessage("rb");
-	rotate(stack);
-}
+	t_list	*el;
 
-void	rra(t_list **stack)
-{
-	logmessage("rra");
-	reverse_rotate(stack);
-}
-
-void	rrb(t_list **stack)
-{
-	logmessage("rrb");
-	reverse_rotate(stack);
+	if (*stackB)
+	{
+		logmessage("pa");
+		el = *stackB;
+		*stackB = (*stackB)->next;
+		ft_lstadd_front(stackA, el);
+	}
 }
