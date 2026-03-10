@@ -27,12 +27,12 @@ then run with
 ```
 ./push_swap 1 5 2 ... -100 325
 ```
-or 
+or
 ```
 ./push_swap "1 5 2 ... -100 325"
 ```
 
-Do not provide duplicates or numbers that are not inside the int limits as arguments. 
+Provide only integer numbers as arguments without duplicates or numbers that are outside the int limits.
 
 # Resources
 
