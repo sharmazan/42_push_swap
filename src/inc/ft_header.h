@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/09 16:06:29 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/12 18:12:43 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int		stack_to_array(t_list *stack, int **a);
 int		bits_in_number(int n);
 int		is_duplicates(int *a, size_t len);
 void	sort_array(int *a, size_t len);
-void	verify_int(char *s);
+int		verify_int(char *s);
+int		verify_arguments_int(int ac, char **av);
 int		index_in_array(int n, int *a, size_t len);
 void	clear_and_exit(int *a, t_list **stack_a, t_list **stack_b);
-void	verify_arguments_int(int ac, char **av);
 void	store_numbers(int ac, char **av, t_list **stack);
 void	verify_and_store_numbers(int ac, char **av, t_list **stack);
 

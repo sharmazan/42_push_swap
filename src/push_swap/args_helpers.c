@@ -6,20 +6,11 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/09 16:06:19 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/12 19:09:00 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_header.h"
-
-void	verify_arguments_int(int ac, char **av)
-{
-	int	i;
-
-	i = 0;
-	while (i < ac)
-		verify_int(av[i++]);
-}
 
 void	store_numbers(int ac, char **av, t_list **stack)
 {

@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/09 15:58:43 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/12 19:13:15 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,42 @@ int	bits_in_number(int n)
 	return (bits);
 }
 
-void	verify_int(char *s)
+static int	is_int(char *s)
 {
-	char	*converted;
-	size_t	len;
+	long	num;
+	int		sign;
 
-	len = ft_strlen(s);
-	converted = ft_itoa(ft_atoi(s));
-	if (!converted)
-		errexit("malloc Error");
-	if (ft_strncmp(s, converted, len + 1))
+	if (!s || !*s || ft_strlen(s) > 11)
+		return (0);
+	sign = 1;
+	if ((*s == '+' || *s == '-') && (*s == '-'))
 	{
-		free(converted);
-		errexit("Error");
+		sign = -1;
+		s++;
 	}
-	free(converted);
+	if (!*s)
+		return (0);
+	num = 0;
+	while (*s)
+	{
+		if (*s < '0' || *s > '9')
+			return (0);
+		num = num * 10 + (*s - '0');
+		if ((sign == 1 && num > 2147483647)
+			|| (sign == -1 && -(num) < -2147483648L))
+			return (0);
+		s++;
+	}
+	return (1);
+}
+
+int	verify_arguments_int(int ac, char **av)
+{
+	int	i;
+
+	i = 0;
+	while (i < ac)
+		if (!is_int(av[i++]))
+			return (0);
+	return (1);
 }
