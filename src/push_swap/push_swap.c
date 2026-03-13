@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/09 16:05:58 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/13 14:27:41 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,31 +55,54 @@
 // 	merge_sorted_halves(a, middle, len);
 // }
 
-int	min_index_in_stack(t_list *stack)
-{
-	t_list	*el;
-	int		min_pos;
-	int		min;
-	int		pos;
+// int	min_index_in_stack(t_list *stack)
+// {
+// 	t_list	*el;
+// 	int		min_pos;
+// 	int		min;
+// 	int		pos;
 
-	if (!stack)
-		return (-1);
-	el = stack;
-	min = *(int *)el->content;
-	min_pos = 0;
-	pos = 0;
-	while (el->next)
-	{
-		el = el->next;
-		pos++;
-		if (*(int *)el->content < min)
-		{
-			min = *(int *)el->content;
-			min_pos = pos;
-		}
-	}
-	return (min_pos);
-}
+// 	if (!stack)
+// 		return (-1);
+// 	el = stack;
+// 	min = *(int *)el->content;
+// 	min_pos = 0;
+// 	pos = 0;
+// 	while (el->next)
+// 	{
+// 		el = el->next;
+// 		pos++;
+// 		if (*(int *)el->content < min)
+// 		{
+// 			min = *(int *)el->content;
+// 			min_pos = pos;
+// 		}
+// 	}
+// 	return (min_pos);
+// }
+
+// void    selection_sort_stacks(t_list **stackA, t_list **stackB)
+// {
+//    void    (*op)(t_list * *stack);
+
+//    int i, num_count;
+//    while (*stackA && (*stackA)->next)
+//    {
+//        num_count = ft_lstsize(*stackA);
+//        i = min_index_in_stack(*stackA);
+//        op = ra;
+//        if (i > num_count - i)
+//        {
+//            op = rra;
+//            i = num_count - i;
+//        }
+//        while (i--)
+//            op(stackA);
+//        pb(stackA, stackB);
+//    }
+//    while (*stackB)
+//        pa(stackA, stackB);
+// }
 
 void	normalize_stack(t_list **stack, int *arr, int len)
 {
@@ -93,13 +116,35 @@ void	normalize_stack(t_list **stack, int *arr, int len)
 	}
 }
 
-void	radix_sort_stacks(t_list **stack_a, t_list **stack_b)
+void	radix_sort_stacks(t_list **stack_a, t_list **stack_b, int num_count)
 {
 	int	i;
-	int	num_count;
 	int	max_bits;
 
-	num_count = ft_lstsize(*stack_a);
+	max_bits = bits_in_number(num_count - 1);
+	i = 0;
+	while (i < max_bits)
+	{
+		num_count = ft_lstsize(*stack_a);
+		while (num_count)
+		{
+			if (get_bit(i, *(int *)(*stack_a)->content))
+				ra(stack_a);
+			else
+				pb(stack_a, stack_b);
+			num_count--;
+		}
+		while (*stack_b)
+			pa(stack_a, stack_b);
+		i++;
+	}
+}
+
+void	fast_sort_stacks(t_list **stack_a, t_list **stack_b, int num_count)
+{
+	int	i;
+	int	max_bits;
+
 	max_bits = bits_in_number(num_count - 1);
 	i = 0;
 	while (i < max_bits)
@@ -128,7 +173,6 @@ int	main(int ac, char **av)
 
 	if (ac == 1)
 		exit(0);
-	array = NULL;
 	stack_a = NULL;
 	stack_b = NULL;
 	verify_and_store_numbers(ac, av, &stack_a);
@@ -141,7 +185,10 @@ int	main(int ac, char **av)
 	else
 	{
 		normalize_stack(&stack_a, array, num_count);
-		radix_sort_stacks(&stack_a, &stack_b);
+		if (num_count > 5)
+			radix_sort_stacks(&stack_a, &stack_b, num_count);
+		else
+			fast_sort_stacks(&stack_a, &stack_b, num_count);
 	}
 	clear_and_exit(array, &stack_a, &stack_b);
 }
