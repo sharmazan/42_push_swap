@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/13 17:24:43 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/13 19:26:06 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,10 @@ void	fast_sort_five_numbers(t_list **stack_a, t_list **stack_b, int len)
 	if (!sorted(*stack_a))
 	{
 		pb(stack_a, stack_b);
-		fast_sort_four_numbers(stack_a, stack_b);
+		if (len == 5)
+			fast_sort_four_numbers(stack_a, stack_b);
+		else
+			fast_sort_five_numbers(stack_a, stack_b, len - 1);
 		pa(stack_a, stack_b);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/13 19:06:51 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/13 19:26:56 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ int	main(int ac, char **av)
 	else
 	{
 		normalize_stack(&stack_a, array, num_count);
-		if (num_count > 5)
+		if (num_count > 40)
 			radix_sort_stacks(&stack_a, &stack_b, num_count);
 		else
 			fast_sort_stacks(&stack_a, &stack_b, num_count);
