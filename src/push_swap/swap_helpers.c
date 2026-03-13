@@ -6,11 +6,11 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/13 16:09:04 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/13 16:31:10 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_header.h"
+#include "ft_header.h"
 #include <unistd.h>
 
 static void	swap(t_list *stack)

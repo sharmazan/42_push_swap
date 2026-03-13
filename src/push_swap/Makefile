@@ -1,6 +1,7 @@
 NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -I../inc
 
 LIBFT_PATH = ../libft
 LIBFT_LIB = $(LIBFT_PATH)/libft.a
@@ -17,6 +18,7 @@ SOURCES =	push_swap.c \
 			swap_helpers.c \
 			args_helpers.c \
 			int_helpers.c \
+			fast_sort.c \
 			helpers.c
 
 OBJECTS = $(SOURCES:.c=.o)
@@ -33,7 +35,7 @@ $(LIBFT_LIB):
 	$(MAKE) -C $(LIBFT_PATH)
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -o $@ -c $<
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c $<
 
 fclean: clean
 	rm -f $(NAME)
