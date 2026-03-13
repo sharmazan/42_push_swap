@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/13 16:31:10 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/13 19:06:51 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,10 @@ void	fast_sort_stacks(t_list **stack_a, t_list **stack_b, int num_count)
 		fast_sort_two_numbers(stack_a);
 	else if (num_count == 3)
 		fast_sort_three_numbers(stack_a);
-	(void)stack_b;
+	else if (num_count == 4)
+		fast_sort_four_numbers(stack_a, stack_b);
+	else
+		fast_sort_five_numbers(stack_a, stack_b, num_count);
 }
 
 int	main(int ac, char **av)

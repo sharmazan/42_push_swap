@@ -4,22 +4,33 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 PUSH_SWAP_PATH = $(SRC_PATH)/$(NAME)
+PUSH_SWAP_BIN = $(PUSH_SWAP_PATH)/$(NAME)
 LIBFT_PATH = $(SRC_PATH)/libft
 LIBFT_LIB = $(LIBFT_PATH)/libft.a
 FTPRINTF_PATH = $(SRC_PATH)/ft_printf
 FTPRINTF_LIB = $(FTPRINTF_PATH)/libftprintf.a
-HEADER = src/inc/ft_header.h
+INC_PATH = $(SRC_PATH)/inc
+
+PUSH_SWAP_SRCS = $(wildcard $(PUSH_SWAP_PATH)/*.c)
+PUSH_SWAP_HDRS = $(wildcard $(INC_PATH)/*.h)
+FTPRINTF_SRCS = $(wildcard $(FTPRINTF_PATH)/*.c)
+FTPRINTF_HDRS = $(wildcard $(FTPRINTF_PATH)/*.h)
+LIBFT_SRCS = $(wildcard $(LIBFT_PATH)/*.c)
+LIBFT_HDRS = $(wildcard $(LIBFT_PATH)/*.h)
 
 all: $(NAME)
 
-$(NAME): $(FTPRINTF_LIB) $(LIBFT_LIB) $(HEADER)
-	$(MAKE) -C $(PUSH_SWAP_PATH) CC="$(CC)" CFLAGS="$(CFLAGS)"
-	cp $(PUSH_SWAP_PATH)/$(NAME) .
 
-$(FTPRINTF_LIB):
+$(NAME): $(PUSH_SWAP_BIN)
+	cp $(PUSH_SWAP_BIN) $@
+
+$(PUSH_SWAP_BIN): $(PUSH_SWAP_SRCS) $(PUSH_SWAP_HDRS) $(PUSH_SWAP_PATH)/Makefile $(FTPRINTF_LIB) $(LIBFT_LIB)
+	$(MAKE) -C $(PUSH_SWAP_PATH) CC="$(CC)" CFLAGS="$(CFLAGS)"
+
+$(FTPRINTF_LIB): $(FTPRINTF_SRCS) $(FTPRINTF_HDRS) $(FTPRINTF_PATH)/Makefile
 	$(MAKE) -C $(FTPRINTF_PATH) CC="$(CC)" CFLAGS="$(CFLAGS)"
 
-$(LIBFT_LIB):
+$(LIBFT_LIB): $(LIBFT_SRCS) $(LIBFT_HDRS) $(LIBFT_PATH)/Makefile
 	$(MAKE) -C $(LIBFT_PATH) CC="$(CC)" CFLAGS="$(CFLAGS)"
 
 debug: CFLAGS += -g3 -O0

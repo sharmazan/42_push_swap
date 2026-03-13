@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/13 16:21:22 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/13 17:26:05 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	reverse_rotate(t_list **stack);
 
 void	fast_sort_two_numbers(t_list **stack_a);
 void	fast_sort_three_numbers(t_list **stack_a);
+void	fast_sort_four_numbers(t_list **stack_a, t_list **stack_b);
+void	fast_sort_five_numbers(t_list **stack_a, t_list **stack_b, int len);
 void	sort_array(int *a, size_t len);
 
 void	logmessage(char *s);
