@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/12 19:13:15 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/13 14:06:26 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	bits_in_number(int n)
 	return (bits);
 }
 
-static int	is_int(char *s)
+int	is_int(char *s)
 {
 	long	num;
 	int		sign;
