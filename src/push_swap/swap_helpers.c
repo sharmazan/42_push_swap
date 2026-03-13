@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_helpers.c                                     :+:      :+:    :+:   */
+/*   swap_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/13 15:19:22 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/13 16:09:04 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_header.h"
 #include <unistd.h>
 
-void	pb(t_list **stack_a, t_list **stack_b)
+static void	swap(t_list *stack)
 {
-	t_list	*el;
+	int	n;
 
-	if (*stack_a)
-	{
-		logmessage("pb");
-		el = *stack_a;
-		*stack_a = (*stack_a)->next;
-		ft_lstadd_front(stack_b, el);
-	}
+	n = *(int *)stack->content;
+	*(int *)stack->content = *(int *)stack->next->content;
+	*(int *)stack->next->content = n;
 }
 
-void	pa(t_list **stack_a, t_list **stack_b)
+void	sa(t_list **stack)
 {
-	t_list	*el;
+	logmessage("sa");
+	swap(*stack);
+}
 
-	if (*stack_b)
-	{
-		logmessage("pa");
-		el = *stack_b;
-		*stack_b = (*stack_b)->next;
-		ft_lstadd_front(stack_a, el);
-	}
+void	sb(t_list **stack)
+{
+	logmessage("sb");
+	swap(*stack);
 }

@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2026/03/09 15:27:09 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2026/03/13 15:19:22 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,16 @@
 // 	return (flag);
 // }
 
-// void	pb(my_stack **stackA, my_stack **stackB)
+// void	pb(my_stack **stack_a, my_stack **stack_b)
 // {
 // 	my_stack	*el;
 
-// 	if (*stackA)
+// 	if (*stack_a)
 // 	{
-// 		el = *stackA;
-// 		*stackA = (*stackA)->next;
-// 		el->next = *stackB;
-// 		*stackB = el;
+// 		el = *stack_a;
+// 		*stack_a = (*stack_a)->next;
+// 		el->next = *stack_b;
+// 		*stack_b = el;
 // 	}
 // }
 
@@ -136,8 +136,8 @@
 
 // int	main(int ac, char **av)
 // {
-// 	my_stack	*stackA;
-// 	my_stack	*stackB;
+// 	my_stack	*stack_a;
+// 	my_stack	*stack_b;
 
 // 	printf("%d arguments provided\n", ac);
 // 	if (ac == 1)
@@ -145,32 +145,32 @@
 // 		printf("Provide one or more numbers\n");
 // 		return (1);
 // 	}
-// 	stackA = NULL;
-// 	stackB = NULL;
-// 	// read_arguments(&stackA, ac, av);
-// 	read_arguments_backwards(&stackA, ac, av);
-// 	print_stack(stackA);
-// 	print_stack(stackB);
-// 	if (sorted(stackA))
+// 	stack_a = NULL;
+// 	stack_b = NULL;
+// 	// read_arguments(&stack_a, ac, av);
+// 	read_arguments_backwards(&stack_a, ac, av);
+// 	print_stack(stack_a);
+// 	print_stack(stack_b);
+// 	if (sorted(stack_a))
 // 		printf("A is sorted\n");
 // 	else
 // 		printf("A is not sorted\n");
-// 	if (sorted(stackB))
+// 	if (sorted(stack_b))
 // 		printf("B is sorted\n");
 // 	else
 // 		printf("B is not sorted\n");
-// 	pb(&stackA, &stackB);
-// 	print_stack(stackA);
-// 	print_stack(stackB);
-// 	if (sorted(stackA))
+// 	pb(&stack_a, &stack_b);
+// 	print_stack(stack_a);
+// 	print_stack(stack_b);
+// 	if (sorted(stack_a))
 // 		printf("A is sorted\n");
 // 	else
 // 		printf("A is not sorted\n");
-// 	if (sorted(stackB))
+// 	if (sorted(stack_b))
 // 		printf("B is sorted\n");
 // 	else
 // 		printf("B is not sorted\n");
-// 	free_stack(stackA);
-// 	free_stack(stackB);
+// 	free_stack(stack_a);
+// 	free_stack(stack_b);
 // 	return (0);
 // }

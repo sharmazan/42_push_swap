@@ -14,6 +14,7 @@ SOURCES =	push_swap.c \
 			stack_helpers.c \
 			array_helpers.c \
 			push_helpers.c \
+			swap_helpers.c \
 			args_helpers.c \
 			int_helpers.c \
 			helpers.c
