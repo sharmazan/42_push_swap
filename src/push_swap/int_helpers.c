@@ -14,7 +14,7 @@
 
 char	get_bit(int pos, unsigned int c)
 {
-	return ((1 << pos) & c);
+	return ((c >> pos) & 1U);
 }
 
 int	bits_in_number(int n)
